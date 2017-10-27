@@ -1,7 +1,8 @@
 #include <iostream>
+#include "RomanNum.h"
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
+    testConstructor();
     return 0;
 }
