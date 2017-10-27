@@ -1,16 +1,7 @@
 //
 // Created by Javier Zarate on 10/26/17.
 //
-
 #include "RomanNum.h"
-
-/*!
- *Defualt constructor
- */
-Roman::Roman()
-{
-    value = 0;
-}
 
 //This helps with testing, do not modify.
 void testConstructor()
@@ -20,8 +11,8 @@ void testConstructor()
     checkTest("testConstructor #1", 0, blank);
 
     //Test reading in a number.
-    //Roman a ("LXVI");
-    //checkTest("testConstructor #2", 66, a);
+    Roman a ("LXVI");
+    checkTest("testConstructor #2", 66, a);
 
     //Test a bigger number.
     //Roman b ("MMMDDCCLLXXVVII");
@@ -43,6 +34,63 @@ bool checkTest(string testName, int whatItShouldBe, const Roman& obj)
         return false;
     }
 }
+
+/*!
+ *Defualt constructor
+ */
+Roman::Roman()
+{
+    value = 0;
+}
+
+Roman::Roman(const string &str)
+{
+    convertFromRoman(str);
+}
+
+void Roman::convertFromRoman(const string &roman)
+{
+    value = 0;
+
+    for (int i = 0; i <roman.length(); i++)
+    {
+        if(roman.at(i)=='X')
+        {
+            value = value + 10;
+        }
+        else if(roman.at(i)=='L')
+        {
+            value = value + 50;
+        }
+        else if(roman.at(i)=='V')
+        {
+            value = value + 5;
+        }
+        else if(roman.at(i)=='I')
+        {
+            value = value + 1;
+        }
+        else if(roman.at(i)=='D')
+        {
+            value = value + 500;
+        }
+        else if(roman.at(i)=='M')
+        {
+            value = value + 1000;
+        }
+        else if(roman.at(i)=='C')
+        {
+            value = value + 100;
+        }
+    }
+}
+
+/*
+string Roman::convertToRoman() const
+{
+    return std::string();
+}
+*/
 
 //this helps with testing, do not modify
 bool checkTest(string testName, string whatItShouldBe, string whatItis)
