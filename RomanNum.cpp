@@ -62,6 +62,16 @@ void testOperatorPlusEqual()
     checkTest("testOperatorPlusEqual #3", 1218, b);
 }
 //this helps with testing, do not modify
+
+void testOperatorIncrement()
+{
+    //Test prefix increment
+    Roman a("MLII");
+    Roman b("DDCCI");
+    b = ++a;
+    checkTest("testOperatorIncrement #1", 1053, a);
+    checkTest("testOperatorIncrement #2", 1053, b);
+}
 bool checkTest(string testName, int whatItShouldBe, const Roman& obj)
 {
     if(whatItShouldBe == obj.value)
@@ -213,6 +223,13 @@ void Roman::operator+=(const Roman& rhs) //The left and right operands are Roman
 void Roman::operator+=(const int rhs) //The left operand is a Roman object, the right is an int number.  The left operand can change.
 {
     value += rhs;
+}
+
+Roman Roman::operator++() //The prefix ++ operator
+{
+    Roman newValue;
+    newValue.value = ++value ;
+    return newValue;
 }
 
 
