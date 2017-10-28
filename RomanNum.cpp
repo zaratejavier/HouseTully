@@ -58,8 +58,8 @@ void testOperatorPlusEqual()
     checkTest("testOperatorPlusEqual #2", 1201, b);
 
     //Test adding on an integer
-    //b += 17;
-    //checkTest("testOperatorPlusEqual #3", 1218, b);
+    b += 17;
+    checkTest("testOperatorPlusEqual #3", 1218, b);
 }
 //this helps with testing, do not modify
 bool checkTest(string testName, int whatItShouldBe, const Roman& obj)
@@ -208,6 +208,11 @@ void Roman::operator+=(const Roman& rhs) //The left and right operands are Roman
     value += rhs.value;
 
 
+}
+
+void Roman::operator+=(const int rhs) //The left operand is a Roman object, the right is an int number.  The left operand can change.
+{
+    value += rhs;
 }
 
 
