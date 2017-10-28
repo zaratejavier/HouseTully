@@ -11,14 +11,56 @@ void testConstructor()
     checkTest("testConstructor #1", 0, blank);
 
     //Test reading in a number.
-    Roman a ("LXVI");
+    Roman a("LXVI");
     checkTest("testConstructor #2", 66, a);
 
     //Test a bigger number.
-    //Roman b ("MMMDDCCLLXXVVII");
-    //checkTest("testConstructor #3", 4332, b);}
+    Roman b("MMMDDCCLLXXVVII");
+    checkTest("testConstructor #3", 4332, b);
+
 }
 
+void testOperatorPlus()
+{
+    //Test adding two roman objects
+    Roman a("XVI");
+    Roman b("MDCLXVI");
+    Roman c = a + b;
+    checkTest("testOperatorPlus #1", 1682, c);
+
+    //make sure the left and right operands weren't modified
+    checkTest("testOperatorPlus #2", 16, a);
+    checkTest("testOperatorPlus #3", 1666, b);
+
+    //Test adding an object with an int
+    c = a + 52;
+    checkTest("testOperatorPlus #4", 68, c);
+    //make sure the left operand wasn't modified
+    checkTest("testOperatorPlus #5", 16, a);
+
+    //Test adding an int with an object
+    c = 578 + a;
+    checkTest("testOperatorPlus #6", 594, c);
+
+    //make sure the right operand wasn't modified
+    checkTest("testOperatorPlus #7", 16, a);
+
+}
+
+void testOperatorPlusEqual()
+{
+    //Test adding two roman objects
+    Roman a("MLII");
+    Roman b("DDCCI");
+    a += b;
+    checkTest("testOperatorPlusEqual #1", 2253, a);
+    //make sure the right operand wasn't modified
+    checkTest("testOperatorPlusEqual #2", 1201, b);
+
+    //Test adding on an integer
+    //b += 17;
+    //checkTest("testOperatorPlusEqual #3", 1218, b);
+}
 //this helps with testing, do not modify
 bool checkTest(string testName, int whatItShouldBe, const Roman& obj)
 {
@@ -85,12 +127,89 @@ void Roman::convertFromRoman(const string &roman)
     }
 }
 
-/*
+
 string Roman::convertToRoman() const
 {
-    return std::string();
+    string RomanVal= "";
+    unsigned int tempValue = value;
+
+    while (tempValue>0)
+    {
+        if(tempValue >= 1000)
+        {
+            tempValue = tempValue -1000;
+            RomanVal = RomanVal + 'M';
+        }
+        else if( tempValue >= 500)
+        {
+            tempValue = tempValue -500;
+            RomanVal = RomanVal + 'D';
+        }
+        else if( tempValue >=100) {
+            tempValue = tempValue - 100;
+            RomanVal = RomanVal + 'C';
+        }
+        else if (tempValue >= 50)
+        {
+            tempValue = tempValue -50;
+            RomanVal = RomanVal + 'L';
+        }
+        else if (tempValue>=10)
+        {
+            tempValue= tempValue -10;
+            RomanVal = RomanVal + 'X';
+        }
+        else if (tempValue>=5)
+        {
+            tempValue= tempValue -5;
+            RomanVal = RomanVal + 'V';
+        }
+        else if ( tempValue>= 1)
+        {
+            tempValue = tempValue -1;
+            RomanVal = RomanVal + 'I';
+        }
+    }
+    return RomanVal;
 }
-*/
+
+// XXI + II
+Roman Roman::operator+(Roman rhs) const
+{
+
+    Roman newValue;
+    newValue.value = value + rhs.value;
+    return newValue;
+}
+
+// XXI + 3
+// Roman a;
+// Roman b = a + 8;
+Roman Roman::operator+(const int rhs) const //The left operand is a Roman object, the right is an int number.
+{
+    Roman newValue;
+    newValue.value = value + rhs;
+    return newValue;
+}
+
+
+// Roman a;
+// Roman c = 9 + b;
+Roman operator+(const int lhsValue,  const Roman& rhs) //The left operand is an int, the right operand is a Roman object.
+{
+    Roman newValue;
+    newValue.value = lhsValue + rhs.value;
+
+    return newValue;
+}
+
+void Roman::operator+=(const Roman& rhs) //The left and right operands are Roman objects, but the left operand can change.
+{
+    value += rhs.value;
+
+
+}
+
 
 //this helps with testing, do not modify
 bool checkTest(string testName, string whatItShouldBe, string whatItis)
