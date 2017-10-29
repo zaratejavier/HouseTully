@@ -13,6 +13,7 @@ void testOperatorPlus();
 void testOperatorPlusEqual();
 void testOperatorIncrement();
 void testOutput();
+bool checkTest(string , string , string );
 
 
 
@@ -37,10 +38,10 @@ public:
     void operator +=(const int);  //The left operand is a Roman object, the right is an int number.  The left operand can change.
     Roman operator++();  //The prefix ++ operator
 
-
-
     friend bool checkTest(string, int, const Roman&); //A testing function.  It is friended so it can access the class.
     friend void testOutput(); //Another test function that needs to access private class members.
+
+
 };
 
 

@@ -72,6 +72,21 @@ void testOperatorIncrement()
     checkTest("testOperatorIncrement #1", 1053, a);
     checkTest("testOperatorIncrement #2", 1053, b);
 }
+
+void testOutput()
+{
+    Roman a("MDCLXVI");
+    string b = a.convertToRoman();
+    checkTest("testOutput #1", "MDCLXVI", b);
+
+    //This is really the value 7.  Your code should correctly read this in and convert it back to VII.
+    Roman c("IIIIIII");
+    b = c.convertToRoman();
+    checkTest("testOutput #2", "VII", b);
+
+}
+
+
 bool checkTest(string testName, int whatItShouldBe, const Roman& obj)
 {
     if(whatItShouldBe == obj.value)
@@ -228,10 +243,9 @@ void Roman::operator+=(const int rhs) //The left operand is a Roman object, the 
 Roman Roman::operator++() //The prefix ++ operator
 {
     Roman newValue;
-    newValue.value = ++value ;
+    newValue.value = ++value;
     return newValue;
 }
-
 
 //this helps with testing, do not modify
 bool checkTest(string testName, string whatItShouldBe, string whatItis)
