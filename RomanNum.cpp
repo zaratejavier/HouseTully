@@ -4,9 +4,14 @@
 #include "RomanNum.h"
 
 //This helps with testing, do not modify.
+
+/*!
+ * Test to make sure that empty objects are set to zero
+ * Test reading in a number.
+ *	Test a bigger number.
+ */
 void testConstructor()
 {
-    //Test to make sure that empty objects are set to zero.
     Roman blank;
     checkTest("testConstructor #1", 0, blank);
 
@@ -20,6 +25,11 @@ void testConstructor()
 
 }
 
+/*!
+ *Test adding two roman objects
+ *Test adding an object with an int
+ *Test adding an int with an object
+ */
 void testOperatorPlus()
 {
     //Test adding two roman objects
@@ -32,24 +42,24 @@ void testOperatorPlus()
     checkTest("testOperatorPlus #2", 16, a);
     checkTest("testOperatorPlus #3", 1666, b);
 
-    //Test adding an object with an int
     c = a + 52;
     checkTest("testOperatorPlus #4", 68, c);
     //make sure the left operand wasn't modified
     checkTest("testOperatorPlus #5", 16, a);
 
-    //Test adding an int with an object
     c = 578 + a;
     checkTest("testOperatorPlus #6", 594, c);
-
     //make sure the right operand wasn't modified
     checkTest("testOperatorPlus #7", 16, a);
 
 }
 
+/*!
+ * Test adding two roman objects
+ * Test adding on an integer
+ */
 void testOperatorPlusEqual()
 {
-    //Test adding two roman objects
     Roman a("MLII");
     Roman b("DDCCI");
     a += b;
@@ -57,12 +67,13 @@ void testOperatorPlusEqual()
     //make sure the right operand wasn't modified
     checkTest("testOperatorPlusEqual #2", 1201, b);
 
-    //Test adding on an integer
     b += 17;
     checkTest("testOperatorPlusEqual #3", 1218, b);
 }
-//this helps with testing, do not modify
 
+/*!
+ *Test prefix increment
+ */
 void testOperatorIncrement()
 {
     //Test prefix increment
@@ -73,6 +84,9 @@ void testOperatorIncrement()
     checkTest("testOperatorIncrement #2", 1053, b);
 }
 
+/*!
+ * A test function that needs to access private class members.
+ */
 void testOutput()
 {
     Roman a("MDCLXVI");
@@ -85,8 +99,14 @@ void testOutput()
     checkTest("testOutput #2", "VII", b);
 
 }
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*!
+ *helps with testing to see if it passes the test
+ * @param testName: a string name
+ * @param whatItShouldBe: an integer
+ * @param obj: a roman object
+ * @return : returns a true or a false
+ */
 bool checkTest(string testName, int whatItShouldBe, const Roman& obj)
 {
     if(whatItShouldBe == obj.value)
@@ -110,11 +130,19 @@ Roman::Roman()
     value = 0;
 }
 
+/*!
+ *The constructor which accepts a string and converts it internally to an integer.  It actually just forwards it onto convertFromRoman()
+ * @param str: a string constant
+ */
 Roman::Roman(const string &str)
 {
     convertFromRoman(str);
 }
 
+/*!
+ *The method that helps us take an roman numeral in a string and convert it into the integer.
+ * @param roman: a constant roman
+ */
 void Roman::convertFromRoman(const string &roman)
 {
     value = 0;
@@ -152,7 +180,10 @@ void Roman::convertFromRoman(const string &roman)
     }
 }
 
-
+/*!
+ *The method that helps us take an integer and turn it into a roman numeral
+ * @return: the Roman value
+ */
 string Roman::convertToRoman() const
 {
     string RomanVal= "";
@@ -198,8 +229,12 @@ string Roman::convertToRoman() const
     return RomanVal;
 }
 
-// XXI + II
-Roman Roman::operator+(Roman rhs) const
+/*!
+ *The left and right operands are Roman objects
+ * @param rhs: adds the "right hand side" which is a roman value to the new value
+ * @return: new value
+ */
+Roman Roman::operator+( const Roman& rhs) const
 {
 
     Roman newValue;
@@ -207,20 +242,25 @@ Roman Roman::operator+(Roman rhs) const
     return newValue;
 }
 
-// XXI + 3
-// Roman a;
-// Roman b = a + 8;
-Roman Roman::operator+(const int rhs) const //The left operand is a Roman object, the right is an int number.
+/*!
+ *The left operand is a Roman object, the right is an int number.
+ * @param rhs: adds the "right hand side" to the new value
+ * @return: new value
+ */
+Roman Roman::operator+(const int rhs) const
 {
     Roman newValue;
     newValue.value = value + rhs;
     return newValue;
 }
 
-
-// Roman a;
-// Roman c = 9 + b;
-Roman operator+(const int lhsValue,  const Roman& rhs) //The left operand is an int, the right operand is a Roman object.
+/*!
+ *The left operand is an int, the right operand is a Roman object.
+ * @param lhsValue: is a constant integer.
+ * @param rhs: is a constant Roman "right hand side"
+ * @return: the new Value
+ */
+Roman operator+(const int lhsValue,  const Roman& rhs)
 {
     Roman newValue;
     newValue.value = lhsValue + rhs.value;
@@ -228,26 +268,44 @@ Roman operator+(const int lhsValue,  const Roman& rhs) //The left operand is an 
     return newValue;
 }
 
-void Roman::operator+=(const Roman& rhs) //The left and right operands are Roman objects, but the left operand can change.
+/*!
+ *The left and right operands are Roman objects, but the left operand can change.
+ * @param rhs: is the "right hand side" which is a constant roman.
+ */
+void Roman::operator+=(const Roman& rhs)
 {
     value += rhs.value;
 
 
 }
 
-void Roman::operator+=(const int rhs) //The left operand is a Roman object, the right is an int number.  The left operand can change.
+/*!
+ *the left operand is a Roman object, the right is an int number. The left operand can change.
+ * @param rhs: is the "Right Hand side" which is an Integer constant
+ */
+void Roman::operator+=(const int rhs)
 {
     value += rhs;
 }
 
-Roman Roman::operator++() //The prefix ++ operator
+/*!
+ *The prefix ++ operator
+ * @return: new value
+ */
+Roman Roman::operator++()
 {
     Roman newValue;
     newValue.value = ++value;
     return newValue;
 }
 
-//this helps with testing, do not modify
+/*!
+ *
+ * @param testName: a string name
+ * @param whatItShouldBe: a string name
+ * @param whatItis: what string name
+ * @return: a true or a false
+ */
 bool checkTest(string testName, string whatItShouldBe, string whatItis)
 {
     if(whatItShouldBe == whatItis)
