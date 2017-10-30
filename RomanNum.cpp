@@ -3,7 +3,6 @@
 //
 #include "RomanNum.h"
 
-//This helps with testing, do not modify.
 
 /*!
  * Test to make sure that empty objects are set to zero
