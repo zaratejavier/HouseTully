@@ -13,11 +13,9 @@ void testConstructor()
     Roman blank;
     checkTest("testConstructor #1", 0, blank);
 
-    //Test reading in a number.
     Roman a("LXVI");
     checkTest("testConstructor #2", 66, a);
 
-    //Test a bigger number.
     Roman b("MMMDDCCLLXXVVII");
     checkTest("testConstructor #3", 4332, b);
 
@@ -30,24 +28,19 @@ void testConstructor()
  */
 void testOperatorPlus()
 {
-    //Test adding two roman objects
     Roman a("XVI");
     Roman b("MDCLXVI");
     Roman c = a + b;
     checkTest("testOperatorPlus #1", 1682, c);
-
-    //make sure the left and right operands weren't modified
     checkTest("testOperatorPlus #2", 16, a);
     checkTest("testOperatorPlus #3", 1666, b);
 
     c = a + 52;
     checkTest("testOperatorPlus #4", 68, c);
-    //make sure the left operand wasn't modified
     checkTest("testOperatorPlus #5", 16, a);
 
     c = 578 + a;
     checkTest("testOperatorPlus #6", 594, c);
-    //make sure the right operand wasn't modified
     checkTest("testOperatorPlus #7", 16, a);
 
 }
@@ -62,7 +55,6 @@ void testOperatorPlusEqual()
     Roman b("DDCCI");
     a += b;
     checkTest("testOperatorPlusEqual #1", 2253, a);
-    //make sure the right operand wasn't modified
     checkTest("testOperatorPlusEqual #2", 1201, b);
 
     b += 17;
@@ -74,7 +66,6 @@ void testOperatorPlusEqual()
  */
 void testOperatorIncrement()
 {
-    //Test prefix increment
     Roman a("MLII");
     Roman b("DDCCI");
     b = ++a;
@@ -97,7 +88,6 @@ void testOutput()
     checkTest("testOutput #2", "VII", b);
 
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*!
  *helps with testing to see if it passes the test
  * @param testName: a string name
