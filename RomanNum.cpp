@@ -3,11 +3,10 @@
 //
 #include "RomanNum.h"
 
-
 /*!
  * Test to make sure that empty objects are set to zero
  * Test reading in a number.
- *	Test a bigger number.
+ * Test a bigger number.
  */
 void testConstructor()
 {
@@ -319,5 +318,3 @@ bool checkTest(string testName, string whatItShouldBe, string whatItis)
         return false;
     }
 }
-
-//Good work!! 
