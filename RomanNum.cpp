@@ -75,6 +75,7 @@ void testOperatorIncrement()
 
 /*!
  * A test function that needs to access private class members.
+ * converts to a roman
  */
 void testOutput()
 {
@@ -90,8 +91,8 @@ void testOutput()
 }
 /*!
  *helps with testing to see if it passes the test
- * @param testName: a string name
- * @param whatItShouldBe: an integer
+ * @param testName: The name of the test which is a string
+ * @param whatItShouldBe: what the integer should be
  * @param obj: a roman object
  * @return : returns a true or a false
  */
@@ -222,7 +223,7 @@ string Roman::convertToRoman() const
  * @param rhs: adds the "right hand side" which is a roman value to the new value
  * @return: new value
  */
-Roman Roman::operator+( const Roman& rhs) const
+Roman Roman::operator+(const Roman& rhs) const
 {
 
     Roman newValue;
@@ -263,8 +264,6 @@ Roman operator+(const int lhsValue,  const Roman& rhs)
 void Roman::operator+=(const Roman& rhs)
 {
     value += rhs.value;
-
-
 }
 
 /*!
@@ -289,9 +288,9 @@ Roman Roman::operator++()
 
 /*!
  * checks to see if the test will pass
- * @param testName: a string name
- * @param whatItShouldBe: a string name
- * @param whatItis: what string name
+ * @param testName: the name of the test which is a string
+ * @param whatItShouldBe: the name of what the string should be
+ * @param whatItis: what the string actually is
  * @return: a true or a false
  */
 bool checkTest(string testName, string whatItShouldBe, string whatItis)
