@@ -288,7 +288,7 @@ Roman Roman::operator++()
 }
 
 /*!
- *
+ * checks to see if the test will pass
  * @param testName: a string name
  * @param whatItShouldBe: a string name
  * @param whatItis: what string name
